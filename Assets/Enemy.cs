@@ -4,6 +4,8 @@ namespace Assets
 {
     public class Enemy : MonoBehaviour
     {
+        public EnemyCoordinate EnemyCoordinate { get; set; }
+
         private GameObject bulletPrefab;
         private void Start()
         {

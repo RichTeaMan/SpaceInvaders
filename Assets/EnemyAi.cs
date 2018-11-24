@@ -65,16 +65,22 @@ namespace Assets
                 {
                     var startPosition = new Vector3(currentX, 2.0f, currentY);
 
-                    var enemy = Instantiate(
+                    var enemyModel = Instantiate(
                         basicEnemyPrefab,
                         startPosition,
                         Quaternion.Euler(0, 180, 0));
 
-                    enemy.name = string.Format("Enemy_{0}", i);
+                    enemyModel.name = string.Format("Enemy_{0}", i);
 
-                    enemy.GetComponent<Rigidbody>().velocity = enemy.transform.right * -EnemySpeed;
+                    enemyModel.GetComponent<Rigidbody>().velocity = enemyModel.transform.right * -EnemySpeed;
 
                     currentX += IncrementX;
+
+                    var enemy = enemyModel.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.EnemyCoordinate = new EnemyCoordinate { X = i, Y = y };
+                    }
                 }
                 currentY -= IncrementY;
             }
@@ -127,10 +133,13 @@ namespace Assets
 
             if (Time.frameCount % 40 == 0)
             {
-                foreach (var enemy in EnemySet)
+                // only the closest enemy should fire
+                foreach (var enemyColumn in EnemySet.GroupBy(e => e.EnemyCoordinate.X))
                 {
-                    enemy.Fire();
+                    var closest = enemyColumn.OrderByDescending(e => e.EnemyCoordinate.Y).First();
+                    closest.Fire();
                 }
+                
             }
         }
     }
