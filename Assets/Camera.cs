@@ -8,6 +8,12 @@ namespace Assets
 
         public float speed = 5.0f;
 
+        public float speedH = 2.0f;
+        public float speedV = 2.0f;
+
+        private float yaw = 0.0f;
+        private float pitch = 0.0f;
+
         private static Camera m_Instance;
         public static Camera Instance { get { return m_Instance; } }
 
@@ -29,21 +35,38 @@ namespace Assets
                 print("space key was pressed");
                 Fire();
             }
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
             }
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
                 transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
             }
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+            }
+            if (Input.GetKey(KeyCode.Z))
+            {
+                transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+            }
+            if (Input.GetKey(KeyCode.X))
+            {
+                transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+            }
+
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+                yaw += speedH * Input.GetAxis("Mouse X");
+                pitch -= speedV * Input.GetAxis("Mouse Y");
+
+                transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
             }
         }
 

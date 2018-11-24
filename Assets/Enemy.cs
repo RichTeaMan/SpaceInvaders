@@ -4,6 +4,14 @@ namespace Assets
 {
     public class Enemy : MonoBehaviour
     {
+        private void Start()
+        {
+            EnemyAi.Instance.EnemySet.Add(this);
+            
+        }
+        private void Awake()
+        {
+        }
 
         void OnCollisionEnter(Collision collision)
         {
@@ -11,6 +19,11 @@ namespace Assets
             {
                 Destroy(this);
             }
+        }
+
+        private void OnDestroy()
+        {
+            EnemyAi.Instance.EnemySet.Remove(this);
         }
     }
 }

@@ -312,6 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 0}
   speed: 5
+  speedH: 2
+  speedV: 2
 --- !u!1 &858385650
 GameObject:
   m_ObjectHideFlags: 0
