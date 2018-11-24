@@ -27,6 +27,11 @@ namespace Assets
         public int AlienRowHeight = 5;
 
         /// <summary>
+        /// Enemy fire rate as percentage. This is rolled every tick.
+        /// </summary>
+        private float FireRate = 1.0f;
+
+        /// <summary>
         /// The distance an alien 'row' should drop when getting closer.
         /// </summary>
         public float DropDistance = 0.5f;
@@ -131,15 +136,15 @@ namespace Assets
                 DropTarget = downPos - DropDistance;
             }
 
-            if (Time.frameCount % 40 == 0)
+            // only the closest enemy should fire
+            foreach (var enemyColumn in EnemySet.GroupBy(e => e.EnemyCoordinate.X))
             {
-                // only the closest enemy should fire
-                foreach (var enemyColumn in EnemySet.GroupBy(e => e.EnemyCoordinate.X))
+                var roll = Random.Range(0.0f, 100.0f);
+                if (roll < FireRate)
                 {
                     var closest = enemyColumn.OrderByDescending(e => e.EnemyCoordinate.Y).First();
                     closest.Fire();
                 }
-                
             }
         }
     }
