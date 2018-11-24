@@ -20,9 +20,9 @@ namespace Assets
 
         public int AlienColumnWidth = 12;
 
-        public float IncrementX = 4.0f;
+        public float IncrementX = 5.0f;
 
-        public float IncrementY = 4.0f;
+        public float IncrementY = 5.0f;
 
         public int AlienRowHeight = 5;
 
@@ -83,6 +83,9 @@ namespace Assets
         // Update is called once per frame
         private void Update()
         {
+            if (!EnemySet.Any())
+                return;
+
             // find most left
             var leftPos = EnemySet.Min(e => e.transform.position.x);
             // find most right
@@ -120,6 +123,14 @@ namespace Assets
             {
                 DroppingAliens = true;
                 DropTarget = downPos - DropDistance;
+            }
+
+            if (Time.frameCount % 40 == 0)
+            {
+                foreach (var enemy in EnemySet)
+                {
+                    enemy.Fire();
+                }
             }
         }
     }
