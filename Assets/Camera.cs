@@ -5,13 +5,11 @@ namespace Assets
     public class Camera : MonoBehaviour
     {
         public GameObject bulletPrefab;
-        public Transform bulletSpawn;
-
 
         public float speed = 5.0f;
 
-        private Camera m_Instance;
-        public Camera Instance { get { return m_Instance; } }
+        private static Camera m_Instance;
+        public static Camera Instance { get { return m_Instance; } }
 
         private void Awake()
         {
@@ -67,7 +65,7 @@ namespace Assets
             bullet.name = Constants.PLAYER_BULLET_NAME;
 
             // Add velocity to the bullet
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
 
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 20.0f);
