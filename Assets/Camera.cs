@@ -14,6 +14,8 @@ namespace Assets
         private float yaw = 0.0f;
         private float pitch = 0.0f;
 
+        private bool cameraArcadeMode = false;
+
         private static Camera m_Instance;
         public static Camera Instance { get { return m_Instance; } }
 
@@ -58,6 +60,20 @@ namespace Assets
             if (Input.GetKey(KeyCode.X))
             {
                 transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (cameraArcadeMode)
+                {
+                    transform.position = new Vector3(0, 1, 10);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+                    transform.position = new Vector3(0, 50, 30);
+                    transform.rotation = Quaternion.Euler(90, 0, 0);
+                }
+                cameraArcadeMode = !cameraArcadeMode;
             }
 
 
