@@ -18,7 +18,13 @@ namespace Assets
 
         public float EnemySpeed = 2.0f;
 
-        public int StartingAliens = 12;
+        public int AlienColumnWidth = 12;
+
+        public float IncrementX = 4.0f;
+
+        public float IncrementY = 4.0f;
+
+        public int AlienRowHeight = 5;
 
         /// <summary>
         /// The distance an alien 'row' should drop when getting closer.
@@ -49,24 +55,28 @@ namespace Assets
             var basicEnemyPrefab = (GameObject)Resources.Load("Models/BasicEnemy", typeof(GameObject));
 
             float startX = -30.0f;
-            float incrementX = 5.0f;
+            float startY = 40.0f;
+            float currentY = startY;
 
-            float currentX = startX;
-
-            for (int i = 0; i < StartingAliens; i++)
+            for (int y = 0; y < AlienRowHeight; y++)
             {
-                var startPosition = new Vector3(currentX, 2.0f, 20.0f);
+                float currentX = startX;
+                for (int i = 0; i < AlienColumnWidth; i++)
+                {
+                    var startPosition = new Vector3(currentX, 2.0f, currentY);
 
-                var enemy = Instantiate(
-                    basicEnemyPrefab,
-                    startPosition,
-                    Quaternion.Euler(0, 180, 0));
+                    var enemy = Instantiate(
+                        basicEnemyPrefab,
+                        startPosition,
+                        Quaternion.Euler(0, 180, 0));
 
-                enemy.name = string.Format("Enemy_{0}", i);
+                    enemy.name = string.Format("Enemy_{0}", i);
 
-                enemy.GetComponent<Rigidbody>().velocity = enemy.transform.right * -EnemySpeed;
+                    enemy.GetComponent<Rigidbody>().velocity = enemy.transform.right * -EnemySpeed;
 
-                currentX += incrementX;
+                    currentX += IncrementX;
+                }
+                currentY -= IncrementY;
             }
         }
 
