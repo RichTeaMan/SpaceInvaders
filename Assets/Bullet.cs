@@ -4,9 +4,10 @@ namespace Assets
 {
     public class Bullet : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collision)
         {
             Destroy(collision.gameObject);
+            Destroy(this);
         }
     }
 }

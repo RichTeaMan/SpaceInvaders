@@ -21,7 +21,7 @@ namespace Assets
 
         private void Awake()
         {
-            bulletPrefab = GameObject.Find("Bullet");
+            bulletPrefab = (GameObject)Resources.Load("Models/Bullet", typeof(GameObject));
             m_Instance = this;
         }
 
