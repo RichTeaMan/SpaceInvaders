@@ -2,7 +2,7 @@
 
 namespace Assets
 {
-    public class Camera : MonoBehaviour
+    public class Control : MonoBehaviour
     {
         public GameObject bulletPrefab;
 
@@ -16,7 +16,7 @@ namespace Assets
 
         private bool cameraArcadeMode = false;
 
-        public static Camera Instance { get; private set; }
+        public static Control Instance { get; private set; }
 
         private void Awake()
         {
@@ -64,11 +64,15 @@ namespace Assets
             {
                 if (cameraArcadeMode)
                 {
-                    transform.position = new Vector3(0, 0, 0);
+                    // switch to under aliens
+                    Camera.main.fieldOfView = 30.0f;
+                    transform.position = new Vector3(0, -0.03f, 0);
                     transform.rotation = Quaternion.Euler(270, 0, 0);
                 }
                 else
                 {
+                    // switch to arcade
+                    Camera.main.fieldOfView = 60.0f;
                     transform.position = new Vector3(0, 30, -50);
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
