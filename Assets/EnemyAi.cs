@@ -49,6 +49,11 @@ namespace Assets
             Instance = this;
         }
 
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
+
         // Use this for initialization
         private void Start()
         {

@@ -6,7 +6,7 @@ namespace Assets
     {
         public GameObject bulletPrefab;
 
-        public float speed = 5.0f;
+        public float speed = 15.0f;
 
         public float speedH = 2.0f;
         public float speedV = 2.0f;
@@ -16,18 +16,17 @@ namespace Assets
 
         private bool cameraArcadeMode = false;
 
-        private static Camera m_Instance;
-        public static Camera Instance { get { return m_Instance; } }
+        public static Camera Instance { get; private set; }
 
         private void Awake()
         {
             bulletPrefab = (GameObject)Resources.Load("Models/Bullet", typeof(GameObject));
-            m_Instance = this;
+            Instance = this;
         }
 
         private void OnDestroy()
         {
-            m_Instance = null;
+            Instance = null;
         }
 
         private void Update()
