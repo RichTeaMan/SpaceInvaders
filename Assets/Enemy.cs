@@ -4,6 +4,8 @@ namespace Assets
 {
     public class Enemy : MonoBehaviour, BulletTarget
     {
+        public bool IsDead { get; private set; }
+
         public EnemyCoordinate EnemyCoordinate { get; set; }
 
         private GameObject bulletPrefab;
@@ -17,9 +19,23 @@ namespace Assets
         {
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            Kill();
+        }
+
         private void OnDestroy()
         {
             EnemyAi.Instance.EnemySet.Remove(this);
+        }
+
+        public void Kill()
+        {
+            EnemyAi.Instance.EnemySet.Remove(this);
+            var rigidBody = GetComponent<Rigidbody>();
+            rigidBody.velocity = new Vector3();
+            rigidBody.useGravity = true;
+            IsDead = true;
         }
 
         public void Fire()
@@ -47,7 +63,7 @@ namespace Assets
         public void Hit(Collider collider, GameObject bullet)
         {
             Destroy(bullet);
-            Destroy(collider.gameObject);
+            Kill();
         }
     }
 }
