@@ -4,6 +4,8 @@ namespace Assets
 {
     public class Enemy : MonoBehaviour, BulletTarget
     {
+        public float Health { get; private set; } = 100;
+
         public bool IsDead { get; private set; }
 
         public EnemyCoordinate EnemyCoordinate { get; set; }
@@ -13,15 +15,10 @@ namespace Assets
         {
             bulletPrefab = (GameObject)Resources.Load("Models/Bullet", typeof(GameObject));
             EnemyAi.Instance.EnemySet.Add(this);
-            
+
         }
         private void Awake()
         {
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            Kill();
         }
 
         private void OnDestroy()
@@ -60,10 +57,14 @@ namespace Assets
             Destroy(bullet, 20.0f);
         }
 
-        public void Hit(Collider collider, GameObject bullet)
+        public void Hit(Collision collision, GameObject bullet)
         {
             Destroy(bullet);
-            Kill();
+            Health = Health - collision.relativeVelocity.magnitude;
+            if (Health < 0)
+            {
+                Kill();
+            }
         }
     }
 }

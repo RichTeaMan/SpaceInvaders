@@ -6,8 +6,13 @@ namespace Assets
     {
         private void OnTriggerEnter(Collider collider)
         {
-            var bulletTarget = collider.GetComponent<BulletTarget>();
-            bulletTarget?.Hit(collider, gameObject);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var bulletTarget = collision.gameObject.GetComponent<BulletTarget>();
+            bulletTarget?.Hit(collision, gameObject);
+            
         }
     }
 }

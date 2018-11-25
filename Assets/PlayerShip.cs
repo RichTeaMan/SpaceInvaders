@@ -63,7 +63,7 @@ namespace Assets
             Destroy(bullet, 20.0f);
         }
 
-        public void Hit(Collider collider, GameObject bullet)
+        public void Hit(Collision collision, GameObject bullet)
         {
             Destroy(bullet);
             Hits++;

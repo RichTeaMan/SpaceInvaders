@@ -9,6 +9,6 @@ namespace Assets
 {
     public interface BulletTarget
     {
-        void Hit(Collider collider, GameObject bullet);
+        void Hit(Collision collision, GameObject bullet);
     }
 }
