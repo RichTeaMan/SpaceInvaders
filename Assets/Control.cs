@@ -4,8 +4,6 @@ namespace Assets
 {
     public class Control : MonoBehaviour
     {
-        public GameObject bulletPrefab;
-
         public float speed = 15.0f;
 
         public float speedH = 2.0f;
@@ -16,11 +14,12 @@ namespace Assets
 
         private bool cameraArcadeMode = false;
 
+        private Vector3 offset = new Vector3(0, -0.03f, 0);
+
         public static Control Instance { get; private set; }
 
         private void Awake()
         {
-            bulletPrefab = (GameObject)Resources.Load("Models/Bullet", typeof(GameObject));
             Instance = this;
         }
 
@@ -31,24 +30,19 @@ namespace Assets
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("space key was pressed");
-                Fire();
-            }
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
             }
-            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
             }
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
             }
@@ -87,6 +81,20 @@ namespace Assets
 
                 transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
             }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
+        }
+
+        private void LateUpdate()
+        {
+            if (!cameraArcadeMode)
+            {
+                // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
+                transform.position = PlayerShip.Instance.transform.position + offset;
+            }
         }
 
         private void OnGui()
@@ -94,23 +102,5 @@ namespace Assets
             // common GUI code goes here
         }
 
-        // etc.
-
-        private void Fire()
-        {
-            // Create the Bullet from the Bullet Prefab
-            var bullet = Instantiate(
-                bulletPrefab,
-                transform.position,
-                transform.rotation);
-
-            bullet.name = Constants.PLAYER_BULLET_NAME;
-
-            // Add velocity to the bullet
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 20;
-
-            // Destroy the bullet after 2 seconds
-            Destroy(bullet, 20.0f);
-        }
     }
 }

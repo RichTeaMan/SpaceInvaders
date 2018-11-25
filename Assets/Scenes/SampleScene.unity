@@ -268,10 +268,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a099c6490cbf543bf49d91bea1c847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 0}
   speed: 5
   speedH: 2
   speedV: 2
+--- !u!1 &754985473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100018, guid: 03496a814854c8d439849174c8057722,
+    type: 3}
+  m_PrefabInternal: {fileID: 2132364186}
+--- !u!114 &754985475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 754985473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bec08316994ee4381514e46b552f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  speed: 15
 --- !u!1 &858385650
 GameObject:
   m_ObjectHideFlags: 0
