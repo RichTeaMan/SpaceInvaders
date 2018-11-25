@@ -23,7 +23,7 @@ namespace Assets
 
         private void OnDestroy()
         {
-            EnemyAi.Instance.EnemySet.Remove(this);
+            EnemyAi.Instance?.EnemySet?.Remove(this);
         }
 
         public void Kill()
