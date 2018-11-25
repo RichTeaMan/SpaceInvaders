@@ -73,12 +73,12 @@ namespace Assets
                 float currentX = startX;
                 for (int i = 0; i < AlienColumnWidth; i++)
                 {
-                    var startPosition = new Vector3(currentX, 2.0f, currentY);
+                    var startPosition = new Vector3(currentX, currentY, 0.0f);
 
                     var enemyModel = Instantiate(
                         basicEnemyPrefab,
                         startPosition,
-                        Quaternion.Euler(0, 180, 0));
+                        Quaternion.Euler(90, 0, 0));
 
                     enemyModel.name = string.Format("Enemy_{0}", i);
 
@@ -107,7 +107,7 @@ namespace Assets
             // find most right
             var rightPos = EnemySet.Max(e => e.transform.position.x);
             // find most down
-            var downPos = EnemySet.Min(e => e.transform.position.z);
+            var downPos = EnemySet.Min(e => e.transform.position.y);
             if (DroppingAliens)
             {
                 if (downPos < DropTarget)
@@ -116,11 +116,11 @@ namespace Assets
                     float speed = 0.0f;
                     if (leftPos < LeftCut + 0.5f)
                     {
-                        speed = -EnemySpeed;
+                        speed = EnemySpeed;
                     }
                     else if (rightPos > RightCut - 0.5f)
                     {
-                        speed = EnemySpeed;
+                        speed = -EnemySpeed;
                     }
                     foreach (var enemy in EnemySet)
                     {

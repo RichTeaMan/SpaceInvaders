@@ -35,7 +35,7 @@ namespace Assets
             // Create the Bullet from the Bullet Prefab
             var bullet = Instantiate(
                 bulletPrefab,
-                transform.position + new Vector3(0, 0, -2.1f),
+                transform.position + new Vector3(0, -2.1f, 0),
                 transform.rotation);
 
             // -2.1f is an adjustment so enemies aren't killed by their own bullet. This value was found with trial

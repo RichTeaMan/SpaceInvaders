@@ -64,13 +64,13 @@ namespace Assets
             {
                 if (cameraArcadeMode)
                 {
-                    transform.position = new Vector3(0, 1, 10);
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    transform.position = new Vector3(0, 0, 0);
+                    transform.rotation = Quaternion.Euler(270, 0, 0);
                 }
                 else
                 {
-                    transform.position = new Vector3(0, 50, 30);
-                    transform.rotation = Quaternion.Euler(90, 0, 0);
+                    transform.position = new Vector3(0, 30, -50);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
                 cameraArcadeMode = !cameraArcadeMode;
             }
