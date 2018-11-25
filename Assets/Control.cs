@@ -105,8 +105,10 @@ namespace Assets
             style.fontSize = 60;
 
             var remainingEnemies = EnemyAi.Instance.EnemySet.Count;
-
             GUI.Label(new Rect(10, 10, 100, 100), $"Remaining enemies: {remainingEnemies}", style);
+
+            var hits = PlayerShip.Instance.Hits;
+            GUI.Label(new Rect(10, 210, 100, 100), $"Hits: {hits}", style);
         }
 
     }

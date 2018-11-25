@@ -2,7 +2,7 @@
 
 namespace Assets
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, BulletTarget
     {
         public EnemyCoordinate EnemyCoordinate { get; set; }
 
@@ -15,14 +15,6 @@ namespace Assets
         }
         private void Awake()
         {
-        }
-
-        void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.name == Constants.PLAYER_BULLET_NAME)
-            {
-                Destroy(this);
-            }
         }
 
         private void OnDestroy()
@@ -50,6 +42,12 @@ namespace Assets
 
             // Destroy the bullet after 2 seconds
             Destroy(bullet, 20.0f);
+        }
+
+        public void Hit(Collider collider, GameObject bullet)
+        {
+            Destroy(bullet);
+            Destroy(collider.gameObject);
         }
     }
 }
