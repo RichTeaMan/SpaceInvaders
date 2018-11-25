@@ -97,9 +97,16 @@ namespace Assets
             }
         }
 
-        private void OnGui()
+        private void OnGUI()
         {
-            // common GUI code goes here
+
+            var style = new GUIStyle();
+            style.normal.textColor = Color.white;
+            style.fontSize = 60;
+
+            var remainingEnemies = EnemyAi.Instance.EnemySet.Count;
+
+            GUI.Label(new Rect(10, 10, 100, 100), $"Remaining enemies: {remainingEnemies}", style);
         }
 
     }
